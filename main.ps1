@@ -46,6 +46,6 @@ Get-ChildItem -Path $DIR_PATH -File | ForEach-Object {
 
         [System.IO.File]::WriteAllBytes($filePath, $content)
         Write-Host "done."
-        exit
+        break
     }
 }
