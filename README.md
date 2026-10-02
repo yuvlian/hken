@@ -20,6 +20,8 @@ if that breaks your game, you can undo the change by running:
 iex "& { $(iwr https://raw.githubusercontent.com/yuvlian/hken/main/main.ps1) } -u"
 ```
 
+if you run into powershell execution policy issues, go ask gpt how to fix it, i have them disabled lol
+
 ## old binary
 
 i've deleted the source (main.c) of hken.exe (the one in prebuilt), but you can still find them in older commits.
