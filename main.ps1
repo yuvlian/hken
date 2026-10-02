@@ -1,13 +1,28 @@
+param(
+    [switch]$u
+)
+
 $DIR_PATH = "./StarRail_Data/StreamingAssets/DesignData/Windows/"
 $FONT_PAT = [System.Text.Encoding]::ASCII.GetBytes("SpriteOutput/UI/Fonts/RPG_CN.ttf")
-$LANG_PAT = [System.Text.Encoding]::ASCII.GetBytes("Korean")
-$REPLACE  = [System.Text.Encoding]::ASCII.GetBytes("en")
+
+if ($u) {
+    $LANG_PAT = [System.Text.Encoding]::ASCII.GetBytes("en")
+    $REPLACE  = [System.Text.Encoding]::ASCII.GetBytes("cn")
+    Write-Host "Undo mode: replacing en -> cn"
+} else {
+    $LANG_PAT = [System.Text.Encoding]::ASCII.GetBytes("Korean")
+    $REPLACE  = [System.Text.Encoding]::ASCII.GetBytes("en")
+    Write-Host "Patch mode: replacing Korean -> en"
+}
 
 function Find-PatternIndex ($Bytes, $Pattern) {
     for ($i = 0; $i -le ($Bytes.Length - $Pattern.Length); $i++) {
         $match = $true
         for ($j = 0; $j -lt $Pattern.Length; $j++) {
-            if ($Bytes[$i + $j] -ne $Pattern[$j]) { $match = $false; break }
+            if ($Bytes[$i + $j] -ne $Pattern[$j]) {
+                $match = $false
+                break
+            }
         }
         if ($match) { return $i }
     }
